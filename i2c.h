@@ -2,7 +2,7 @@
 #define I2C_H
 
 void beginTransmission(int num);
-void beginTransmission();
+void endTransmission();
 void read();
 void write(int num);
 void requestFrom(int num1, int num2);
