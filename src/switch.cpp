@@ -10,8 +10,7 @@
 #include <avr/io.h>
 
 /*
- * Initializes pull-up resistor on PB3 and sets it into input mode
- * Pin 50
+ * Will need to use pins 20 & 21. These are pins SDA & SCL.
  */
 void initSwitchPB3(){
     // Set switch 50 as pull-up enabled input
