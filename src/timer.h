@@ -10,6 +10,6 @@
 #include <avr/io.h>
 
 void initTimer1();
-void delayUs(unsigned int delay);
+void delayMs(unsigned int delay);
 
 #endif

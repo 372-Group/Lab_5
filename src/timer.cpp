@@ -26,7 +26,7 @@ void initTimer1(){
  */
 
 // THIS SHOULD BE WORKING, I CHECKED IT, BUT CHECK WITH ARDUINO
-void delayUs(unsigned int delay){
+void delayMs(unsigned int delay){
     //setthecounterto0
     TIFR1|=(1<<OCF1A);
     TCNT1=0;
