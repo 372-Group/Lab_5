@@ -1,2 +1,2 @@
-# Lab_4
-Lab_4 for Microprocessor Organization
+# Lab_5
+Lab_5 for Microprocessor Organization
