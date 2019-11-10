@@ -17,13 +17,15 @@ void beginTransmission(int num){
     TWDR = num;
 }
 void endTransmission(){
-
+    // set the stop condition
+    TWCR = ((1 << TWEN) | (1 << TWINT) | (1 << TWSTO));
+    wait_for_completion;
 }
 void read(){
 
 }
 void write(int num){
-
+    
 }
 void requestFrom(int num1, int num2){
 
