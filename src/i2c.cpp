@@ -2,6 +2,8 @@
 #include <avr/io.h>
 
 #define wait_for_completion while(!(TWCR & (1 << TWINT)));
+#define I2C_WRITE 0
+#define I2C_READ 1
 
 
 void init2C(){
@@ -14,7 +16,7 @@ void init2C(){
 void beginTransmission(int num){
     TWCR = ((1 << TWEN) | (1<<TWINT) | (1<<TWSTA));
     wait_for_completion;
-    TWDR = num;
+    TWDR = num + I2C_WRITE;
 }
 void endTransmission(){
     // set the stop condition
@@ -22,6 +24,12 @@ void endTransmission(){
     wait_for_completion;
 }
 void read(){
+
+    TWCR = ((1 << TWEN) | (1 << TWINT) | (1 << TWSTA)); // set another start condition
+    wait_for_completion;
+    TWDR = 0x6C + I2C_READ; // SLA+R, switch to reading
+    TWCR = ((1 << TWEN) | (1 << TWINT)); // trigger I2C action
+    wait_for_completion;
 
 }
 void write(int num){
