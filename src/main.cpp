@@ -9,10 +9,8 @@
 //
 #include <Arduino.h>
 #include <avr/io.h>
-#include "adc.h"
 #include "switch.h"
 #include "timer.h"
-#include "pwm.h"
 #define DELAY 1000
 
 int main(){
