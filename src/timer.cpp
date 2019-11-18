@@ -5,6 +5,7 @@
 //----------------------------------------------------------------------//
 
 #include "timer.h"
+#include <Arduino.h>
 
 /* Initializing timer 1. Using CTC mode  .*/
 void initTimer1(){
@@ -18,7 +19,7 @@ void initTimer1(){
     TCCR1B &= ~(1<<CS12);
     
     // This sets our output compare register to 16, thus allowing us to have 1 microsecond delay
-    OCR1A = 16000/64;
+    //OCR1A = 16000/64;
     
 }
 
@@ -29,15 +30,18 @@ void initTimer1(){
 void delayMs(unsigned int delay){
     //setthecounterto0
     TIFR1|=(1<<OCF1A);
+
+    OCR1AL = 249;
+
     TCNT1=0;
     unsigned int count = 0;
     
     while(count<delay){
         if((TIFR1&(1<<OCF1A))){//incrementeverytimethetimerraisesaflag(counting10msflags)
+            Serial.println(count);
             count++;
             TIFR1|=(1<<OCF1A);//settimertostartcountingagain
         }
-    }
-    
+    }   
 }
 

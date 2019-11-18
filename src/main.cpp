@@ -39,6 +39,8 @@ int main(){
   endTransmission();
 
     while(1){
+      delayMs(1000);
+      Serial.print("This is the test");
       
       beginTransmission(Address);
       requestFrom(x1, Address);
@@ -80,8 +82,6 @@ int main(){
 
       Serial.print("Z = ");
       Serial.println(z);
-      
-      delayMs(DELAY);
 
     return 0;
     }
