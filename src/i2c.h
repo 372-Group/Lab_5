@@ -7,7 +7,6 @@ void endTransmission();
 char read();
 void write(int num);
 void requestFrom(int num1, int num2);
-int status();
 
 /* If the implementation of these functions 
  * overlap, this is fine.

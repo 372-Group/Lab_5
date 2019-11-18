@@ -10,7 +10,6 @@
 #include <Arduino.h>
 #include <avr/io.h>
 #include "i2c.h"
-#include "switch.h"
 #include "timer.h"
 #define DELAY 1000
 
@@ -25,6 +24,7 @@ int main(){
 
   Serial.begin(9600);
   Serial.flush();
+  sei();
   initTimer1();
   initI2C();
 
@@ -42,7 +42,7 @@ int main(){
       
       beginTransmission(Address);
       requestFrom(x1, Address);
-      x = read() << 8;
+      x = (read() << 8);
       endTransmission();
 
       beginTransmission(Address);
@@ -52,7 +52,7 @@ int main(){
 
       beginTransmission(Address);
       requestFrom(y1, Address);
-      y = read() << 8;
+      y = (read() << 8);
       endTransmission();
 
       beginTransmission(Address);
@@ -62,7 +62,7 @@ int main(){
 
       beginTransmission(Address);
       requestFrom(z1, Address);
-      z = read() << 8;
+      z = (read() << 8);
       endTransmission();
 
       beginTransmission(Address);
@@ -79,7 +79,7 @@ int main(){
       Serial.print("\t");
 
       Serial.print("Z = ");
-      Serial.print(x);
+      Serial.println(z);
       
       delayMs(DELAY);
 

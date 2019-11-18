@@ -1,7 +1,7 @@
 // Author: Jessmer Palanca , Ariel Villasenor, Lu Yu
 // Net ID: jjpalanca, arielv, lyu18    
-// Date: 11/03/19     
-// Assignment: Lab 4
+// Date: 11/18/19     
+// Assignment: Lab 5
 //----------------------------------------------------------------------//
 
 #include "timer.h"

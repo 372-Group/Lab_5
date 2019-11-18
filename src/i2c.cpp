@@ -8,16 +8,16 @@
 void initI2C(){
     TWSR |= (1 << TWPS0);
     TWSR &= ~(1 << TWPS1); // prescalar = 1
-    TWBR = 0xC6; //bit rate generator = 10k (TWBR = 198)
+    TWBR = 0xC6; //bit rate generator = 10kHz (TWBR = 198)
     TWCR |= (1 << TWINT) | (1 << TWEN); // enable two wire interface
 }
 
-void beginTransmission(int num){
+void beginTransmission(int address){
     
     TWCR = ((1 << TWEN) | (1<<TWINT) | (1<<TWSTA)); /*Set the start condition*/
     wait_for_completion;
     
-    write(num << 1);/*Send the address to the slave*/
+    write(address << 1);/*Send the address to the slave*/
 }
 
 void endTransmission(){
@@ -32,13 +32,13 @@ char read(){
 
     return TWDR;
 }
-
+/* passes in the slave address or the data*/
 void write(int num){
     TWDR = num; // sets the register address or the data
     TWCR = ((1<< TWEN)|(1<<TWINT)); // Triggers the I2C action
     wait_for_completion;
 }
-
+/*requestFrom(SlaveAddress, )*/
 void requestFrom(int num1, int num2){
     write(num1);
     
@@ -46,8 +46,4 @@ void requestFrom(int num1, int num2){
     wait_for_completion;
 
     write((num2 << 1) + I2C_READ); // sets read bit from 1
-}
-
-int status(){
-    return TWSR & 0b11111000;
 }
