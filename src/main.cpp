@@ -23,58 +23,76 @@ int main(){
   initTimer1();
   initI2C();
 
+  /* begin transmission by passing in our slave address 0x53*/
   beginTransmission(Address);
-  write(0x2D);
+  write(0x2D); //Writing using our power control bit
   write(0x00);
+  /* end the transmission*/
   endTransmission();
 
+  /* begin transmission by passing in our slave address 0x53*/
   beginTransmission(Address);
-  write(0x2D);
+  write(0x2D); //Writing using our power control bit
   write(0x08);
+  /* end the transmission*/
   endTransmission();
 
 	Serial.flush();
 
     while(1){
-
+      /* begin transmission by passing in our slave address 0x53*/
       beginTransmission(Address);
-      requestFrom(x1, Address);
-      x = (read() << 8);
+      requestFrom(x1, Address); // Requesting for DATAX1 (0X33)
+      x = (read() << 8); // set z to read()'s return value, shifted 8 bits to the left 
+      /* end the transmission*/
       endTransmission();
       
+      /* begin transmission by passing in our slave address*/
       beginTransmission(Address);
-      requestFrom(x0, Address);
-      x |= read();
+      requestFrom(x0, Address);// Requesting for DATAX0 (0X32)
+      x |= read();// OR'ing the bits returned from read() with the value currently in x
+      /* end the transmission*/
       endTransmission();
       
+      /* begin transmission by passing in our slave address*/
       beginTransmission(Address);
-      requestFrom(y1, Address);
-      y = (read() << 8);
+      requestFrom(y1, Address);// Requesting for DATAY1 (0X34)
+      y = (read() << 8);// set y to read()'s return value, shifted 8 bits to the left 
+      /* end the transmission*/
       endTransmission();
       
-      beginTransmission(Address);
-      requestFrom(y0, Address);
-      y |= read();
-      endTransmission();
-
-      beginTransmission(Address);
-      requestFrom(z1, Address);
-      z = (read() << 8);
-      endTransmission();
-      
-      beginTransmission(Address);
-      requestFrom(z0, Address);
-      z |= read();
+      /* begin transmission by passing in our slave address*/
+      beginTransmission(Address); 
+      requestFrom(y0, Address);// Requesting for DATAY0 (0X33)
+      y |= read(); // OR'ing the bits returned from read() with the value currently in y
+      /* end the transmission*/
       endTransmission();
 
+      /* begin transmission by passing in our slave address*/
+      beginTransmission(Address);
+      requestFrom(z1, Address);// Requesting for DATAZ1 (0X36)
+      z = (read() << 8); // set z to read()'s return value, shifted 8 bits to the left 
+      /* end the transmission*/
+      endTransmission();
+      
+      /* begin transmission by passing in our slave address*/
+      beginTransmission(Address);
+      requestFrom(z0, Address);// Requesting for DATAZ0 (0X35)
+      z |= read(); // OR'ing the bits returned from read() with the value currently in z
+      /* end the transmission*/
+      endTransmission();
+
+      /*Print the X coordinate*/
       Serial.print("X = ");
       Serial.print(x);
       Serial.print("\t");
 
+      /*Print the Y coordinate*/
       Serial.print("Y = ");
       Serial.print(y);
       Serial.print("\t");
 
+      /*Print the Z coordinate*/
       Serial.print("Z = ");
       Serial.println(z);
       delayMs(1000);
