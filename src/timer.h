@@ -1,7 +1,7 @@
-// Authors:
-// Net ID's:
-// Date:
-// Assignment:
+// Author: Jessmer Palanca , Ariel Villasenor, Lu Yu
+// Net ID: jjpalanca, arielv, lyu18    
+// Date: 11/21/19     
+// Assignment: Lab 5
 //----------------------------------------------------------------------//
 
 #ifndef TIMER_H

@@ -1,3 +1,8 @@
+// Author: Jessmer Palanca , Ariel Villasenor, Lu Yu
+// Net ID: jjpalanca, arielv, lyu18    
+// Date: 11/21/19     
+// Assignment: Lab 5
+//----------------------------------------------------------------------//
 #ifndef I2C_H
 #define I2C_H
 

@@ -1,12 +1,8 @@
 // Author: Jessmer Palanca , Ariel Villasenor, Lu Yu
-// Net ID: jjpalanca, arielv, lyu18     
-// Date: 11/03/19     
+// Net ID: jjpalanca, arielv, lyu18    
+// Date: 11/21/19     
 // Assignment: Lab 5
-//
-// Description: This file contains a programmatic overall description of the
-// program. It should never contain assignments to special function registers
-// for the exception key one-line code such as checking the state of the pin.
-//
+//----------------------------------------------------------------------//
 #include <Arduino.h>
 #include <avr/io.h>
 #include "i2c.h"
@@ -45,37 +41,31 @@ int main(){
       requestFrom(x1, Address);
       x = (read() << 8);
       endTransmission();
-      //endTransmission();
+      
       beginTransmission(Address);
-      //beginTransmission(Address);
       requestFrom(x0, Address);
       x |= read();
       endTransmission();
-      //endTransmission();
+      
       beginTransmission(Address);
-      //beginTransmission(Address);
       requestFrom(y1, Address);
       y = (read() << 8);
       endTransmission();
-      //endTransmission();
+      
       beginTransmission(Address);
-      //beginTransmission(Address);
       requestFrom(y0, Address);
       y |= read();
       endTransmission();
-      //endTransmission();
+
       beginTransmission(Address);
-      //beginTransmission(Address);
       requestFrom(z1, Address);
       z = (read() << 8);
       endTransmission();
-      //endTransmission();
+      
       beginTransmission(Address);
-      //beginTransmission(Address);
       requestFrom(z0, Address);
       z |= read();
       endTransmission();
-      //endTransmission();
 
       Serial.print("X = ");
       Serial.print(x);

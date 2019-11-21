@@ -1,6 +1,6 @@
 // Author: Jessmer Palanca , Ariel Villasenor, Lu Yu
 // Net ID: jjpalanca, arielv, lyu18    
-// Date: 11/18/19     
+// Date: 11/21/19     
 // Assignment: Lab 5
 //----------------------------------------------------------------------//
 
@@ -35,10 +35,9 @@ void delayMs(unsigned int delay){
     unsigned int count = 0;
     
     while(count<delay){
-        if((TIFR1&(1<<OCF1A))){//incrementeverytimethetimerraisesaflag(counting10msflags)
-            //Serial.println(count);
+        if((TIFR1&(1<<OCF1A))){//increment everytime the timerr aises a flag
             count++;
-            TIFR1|=(1<<OCF1A);//settimertostartcountingagain
+            TIFR1|=(1<<OCF1A);//set timer to start counting again
         }
     }   
 }

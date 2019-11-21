@@ -1,3 +1,8 @@
+// Author: Jessmer Palanca , Ariel Villasenor, Lu Yu
+// Net ID: jjpalanca, arielv, lyu18    
+// Date: 11/21/19     
+// Assignment: Lab 5
+//----------------------------------------------------------------------//
 #include "i2c.h"
 #include <avr/io.h>
 
