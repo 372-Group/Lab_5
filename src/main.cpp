@@ -27,7 +27,7 @@ int main(){
   initTimer1();
   initI2C();
 
-  /*beginTransmission(Address);
+  beginTransmission(Address);
   write(0x2D);
   write(0x00);
   endTransmission();
@@ -35,48 +35,18 @@ int main(){
   beginTransmission(Address);
   write(0x2D);
   write(0x08);
-  endTransmission();*/
+  endTransmission();
 
-  beginTransmission(0xA6); // Target accelerometer
+  /*beginTransmission(0xA6); // Target accelerometer
 	write(0x2D); // Write to POWER_CTL
 	write(0x08); // Set Measure bit to 1
-	endTransmission(); // Commit writes
+	endTransmission(); // Commit writes*/
 
 	Serial.flush();
 
     while(1){
-      
-      /*beginTransmission(Address);
-      requestFrom(x1, Address);
-      x = (read() << 8);
-      //endTransmission();
 
-      //beginTransmission(Address);
-      requestFrom(x0, Address);
-      x |= read();
-      //endTransmission();
-
-      //beginTransmission(Address);
-      requestFrom(y1, Address);
-      y = (read() << 8);
-      //endTransmission();
-
-      //beginTransmission(Address);
-      requestFrom(y0, Address);
-      y |= read();
-      //endTransmission();
-
-      //beginTransmission(Address);
-      requestFrom(z1, Address);
-      z = (read() << 8);
-      //endTransmission();
-
-      //beginTransmission(Address);
-      requestFrom(z0, Address);
-      z |= read();
-      //endTransmission();*/
-
-		// Read X Data
+		/* Read X Data
 		requestFrom(0xA6, 0x32);
 		x = read();
 		requestFrom(0xA6, 0x33);
@@ -92,7 +62,42 @@ int main(){
 		requestFrom(0xA6, 0x36);
 		z = read();
 		requestFrom(0xA6, 0x37);
-		z |= read() << 8;
+		z |= read() << 8;*/
+      beginTransmission(Address);
+      requestFrom(x1, Address);
+      x = (read() << 8);
+      endTransmission();
+      //endTransmission();
+      beginTransmission(Address);
+      //beginTransmission(Address);
+      requestFrom(x0, Address);
+      x |= read();
+      endTransmission();
+      //endTransmission();
+      beginTransmission(Address);
+      //beginTransmission(Address);
+      requestFrom(y1, Address);
+      y = (read() << 8);
+      endTransmission();
+      //endTransmission();
+      beginTransmission(Address);
+      //beginTransmission(Address);
+      requestFrom(y0, Address);
+      y |= read();
+      endTransmission();
+      //endTransmission();
+      beginTransmission(Address);
+      //beginTransmission(Address);
+      requestFrom(z1, Address);
+      z = (read() << 8);
+      endTransmission();
+      //endTransmission();
+      beginTransmission(Address);
+      //beginTransmission(Address);
+      requestFrom(z0, Address);
+      z |= read();
+      endTransmission();
+      //endTransmission();
 
       Serial.print("X = ");
       Serial.print(x);
