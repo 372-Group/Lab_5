@@ -21,14 +21,13 @@ int main(){
   int y=0;
   int z=0;
 
-
   Serial.begin(9600);
   Serial.flush();
   sei();
   initTimer1();
   initI2C();
 
-  beginTransmission(Address);
+  /*beginTransmission(Address);
   write(0x2D);
   write(0x00);
   endTransmission();
@@ -36,41 +35,64 @@ int main(){
   beginTransmission(Address);
   write(0x2D);
   write(0x08);
-  endTransmission();
+  endTransmission();*/
+
+  beginTransmission(0xA6); // Target accelerometer
+	write(0x2D); // Write to POWER_CTL
+	write(0x08); // Set Measure bit to 1
+	endTransmission(); // Commit writes
+
+	Serial.flush();
 
     while(1){
-      delayMs(1000);
-      Serial.print("This is the test");
       
-      beginTransmission(Address);
+      /*beginTransmission(Address);
       requestFrom(x1, Address);
       x = (read() << 8);
-      endTransmission();
+      //endTransmission();
 
-      beginTransmission(Address);
+      //beginTransmission(Address);
       requestFrom(x0, Address);
       x |= read();
-      endTransmission();
+      //endTransmission();
 
-      beginTransmission(Address);
+      //beginTransmission(Address);
       requestFrom(y1, Address);
       y = (read() << 8);
-      endTransmission();
+      //endTransmission();
 
-      beginTransmission(Address);
+      //beginTransmission(Address);
       requestFrom(y0, Address);
       y |= read();
-      endTransmission();
+      //endTransmission();
 
-      beginTransmission(Address);
+      //beginTransmission(Address);
       requestFrom(z1, Address);
       z = (read() << 8);
-      endTransmission();
+      //endTransmission();
 
-      beginTransmission(Address);
+      //beginTransmission(Address);
       requestFrom(z0, Address);
       z |= read();
-      endTransmission();
+      //endTransmission();*/
+
+		// Read X Data
+		requestFrom(0xA6, 0x32);
+		x = read();
+		requestFrom(0xA6, 0x33);
+		x |= read() << 8;
+
+		// Read Y Data
+		requestFrom(0xA6, 0x34);
+		y = read();
+		requestFrom(0xA6, 0x35);
+		y |= read() << 8;
+
+		// Read Z Data
+		requestFrom(0xA6, 0x36);
+		z = read();
+		requestFrom(0xA6, 0x37);
+		z |= read() << 8;
 
       Serial.print("X = ");
       Serial.print(x);
@@ -82,8 +104,9 @@ int main(){
 
       Serial.print("Z = ");
       Serial.println(z);
+      delayMs(1000);
 
-    return 0;
     }
+    return 0;
 }
 

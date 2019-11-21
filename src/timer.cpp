@@ -38,7 +38,7 @@ void delayMs(unsigned int delay){
     
     while(count<delay){
         if((TIFR1&(1<<OCF1A))){//incrementeverytimethetimerraisesaflag(counting10msflags)
-            Serial.println(count);
+            //Serial.println(count);
             count++;
             TIFR1|=(1<<OCF1A);//settimertostartcountingagain
         }

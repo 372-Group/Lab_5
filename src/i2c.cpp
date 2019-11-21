@@ -8,7 +8,7 @@
 void initI2C(){
     TWSR |= (1 << TWPS0);
     TWSR &= ~(1 << TWPS1); // prescalar = 1
-    TWBR = 0xC6; //bit rate generator = 10kHz (TWBR = 198)
+    TWBR = 0xFF; //bit rate generator = 10kHz (TWBR = 198)
     TWCR |= (1 << TWINT) | (1 << TWEN); // enable two wire interface
 }
 
