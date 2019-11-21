@@ -10,6 +10,7 @@
 #define I2C_WRITE 0
 #define I2C_READ 1
 
+/* function that initializes the i2c protocol by setting the prescaler, bit rate and enabling the i2c */
 void initI2C(){
     TWSR |= (1 << TWPS0);
     TWSR &= ~(1 << TWPS1); // prescalar = 1
@@ -17,33 +18,37 @@ void initI2C(){
     TWCR |= (1 << TWINT) | (1 << TWEN); // enable two wire interface
 }
 
+/* function that triggers the start condition and sends the address to the write() fucnction */
 void beginTransmission(int address){
     
     TWCR = ((1 << TWEN) | (1<<TWINT) | (1<<TWSTA)); /*Set the start condition*/
     wait_for_completion;
     
-    write(address << 1);/*Send the address to the slave*/
+    write(address << 1);/*Send the address to the slave and 0 for read/write bit*/
 }
 
+/* function that stops the slave from transmitting data */
 void endTransmission(){
     // set the stop condition
     TWCR = ((1 << TWEN) | (1 << TWINT) | (1 << TWSTO));
-    //wait_for_completion;
 }
 
+/* returns the address stored in the data register */
 char read(){
-    TWCR = ((1 << TWEN) | (1 << TWINT)); //  Not acknowledge
+    TWCR = ((1 << TWEN) | (1 << TWINT)); //  triggers the interrupt flag and enables the i2c
     wait_for_completion;
 
     return TWDR;
 }
+
 /* passes in the slave address or the data*/
 void write(int num){
     TWDR = num; // sets the register address or the data
     TWCR = ((1<< TWEN)|(1<<TWINT)); // Triggers the I2C action
     wait_for_completion;
 }
-/*requestFrom(SlaveAddress, )*/
+
+/*requestFrom(SlaveAddress, InternalAddress)*/
 void requestFrom(int num1, int num2){
     write(num1);
     
