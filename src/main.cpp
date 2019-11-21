@@ -37,32 +37,10 @@ int main(){
   write(0x08);
   endTransmission();
 
-  /*beginTransmission(0xA6); // Target accelerometer
-	write(0x2D); // Write to POWER_CTL
-	write(0x08); // Set Measure bit to 1
-	endTransmission(); // Commit writes*/
-
 	Serial.flush();
 
     while(1){
 
-		/* Read X Data
-		requestFrom(0xA6, 0x32);
-		x = read();
-		requestFrom(0xA6, 0x33);
-		x |= read() << 8;
-
-		// Read Y Data
-		requestFrom(0xA6, 0x34);
-		y = read();
-		requestFrom(0xA6, 0x35);
-		y |= read() << 8;
-
-		// Read Z Data
-		requestFrom(0xA6, 0x36);
-		z = read();
-		requestFrom(0xA6, 0x37);
-		z |= read() << 8;*/
       beginTransmission(Address);
       requestFrom(x1, Address);
       x = (read() << 8);
